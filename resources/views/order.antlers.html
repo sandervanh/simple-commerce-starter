@@ -1,0 +1,71 @@
+{{ simple-commerce:orders :get='order' }}
+    <h2 class="text-center font-bold text-gray-700 text-3xl mb-6">Order #{{ id }}</h2>
+
+    <table class="table-auto mx-auto my-6 md:w-1/2">
+        <tbody>
+            <tr>
+                <th class="border px-4 py-2 bg-gray-100">Date</th>
+                <td class="border px-4 py-2">{{ created_at format='d-m-Y h:i:s A' }}</td>
+            </tr>
+            <tr>
+                <th class="border px-4 py-2 bg-gray-100">Status</th>
+                <td class="border px-4 py-2">{{ order_status:name }}</td>
+            </tr>
+            <tr>
+                <th class="border px-4 py-2 bg-gray-100">Price</th>
+                <td class="border px-4 py-2">{{ total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="my-2 md:w-1/2 md:mx-auto">
+        <h3 class="text-gray-700 text-2xl font-bold">Items</h3>
+    </div>
+
+    <table class="table-auto mx-auto mt-2 mb-6 md:w-1/2">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2">Product</th>
+                <th class="px-4 py-2">Quantity</th>
+                <th class="px-4 py-2">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ line_items }}
+                <tr>
+                    <td class="border px-4 py-2">{{ variant:name }} ({{ variant:sku }})</td>
+                    <td class="border px-4 py-2">
+                        <div class="flex justify-center items-center">
+                            {{ quantity }}
+                        </div>
+                    </td>
+                    <td class="border px-4 py-2">{{ total }}</td>
+                </tr>
+            {{ /line_items }}
+            <tr>
+                <td class="px-4 py-2"></td>
+                <td class="border px-4 py-2 font-semibold">Shipping</td>
+                <td class="border px-4 py-2">{{ shipping_total }}</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2"></td>
+                <td class="border px-4 py-2 font-semibold">Tax</td>
+                <td class="border px-4 py-2">{{ tax_total }}</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2"></td>
+                <td class="border px-4 py-2 font-semibold">Coupons</td>
+                <td class="border px-4 py-2">{{ coupon_total }}</td>
+            </tr>
+            <tr>
+                <td class="px-4 py-2"></td>
+                <td class="border px-4 py-2 font-semibold">Total</td>
+                <td class="border px-4 py-2">{{ total }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center my-12">
+        <a href="/account" class="text-blue-600 text-center text-lg my-6 font-bold">Back to your Account</a>
+    </div>
+{{ /simple-commerce:orders }}

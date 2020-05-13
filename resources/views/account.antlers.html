@@ -1,0 +1,36 @@
+<h2 class="text-center font-bold text-gray-700 text-3xl mb-6">Your Account</h2>
+
+<div class="my-2 md:w-1/2 md:mx-auto">
+    <h3 class="text-gray-700 text-2xl font-bold">Your Orders</h3>
+</div>
+
+{{ if ({ simple-commerce:orders count='true' }) != 0 }}
+    <table class="table-auto mx-auto my-6 md:w-1/2">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="px-4 py-2">Order</th>
+                <th class="px-4 py-2">Date</th>
+                <th class="px-4 py-2">Status</th>
+                <th class="px-4 py-2">Total</th>
+                <th class="px-4 py-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ simple-commerce:orders }}
+                <tr>
+                    <td class="border px-4 py-2"><a class="text-blue-600" href="/orders/{{ uuid }}">#{{ id }}</a></td>
+                    <td class="border px-4 py-2">{{ created_at format='d-m-Y h:i:s A' }}</td>
+                    <td class="border px-4 py-2 font-semibold">{{ order_status:name }}</td>
+                    <td class="border px-4 py-2">{{ total | price }}</td>
+                    <td class="border px-4 py-2">
+                        <a class="bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold" href="/orders/{{ uuid }}">View</a>
+                    </td>
+                </tr>
+            {{ /simple-commerce:orders }}
+        </tbody>
+    </table>
+{{ else }}
+    <div class="mx-auto my-6 md:w-1/2">
+        <p>No orders to display, you haven't ordered anything yet.</p>
+    </div>
+{{ /if }}

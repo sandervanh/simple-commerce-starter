@@ -1,0 +1,41 @@
+title: 'General Global'
+sections:
+  main:
+    display: Main
+    fields:
+      -
+        handle: top_banner
+        field:
+          type: section
+          localizable: false
+          listable: hidden
+          display: 'Top Banner'
+      -
+        handle: show_top_banner
+        field:
+          type: toggle
+          localizable: false
+          listable: hidden
+          display: 'Show Top Banner?'
+      -
+        handle: top_banner_text
+        field:
+          input_type: text
+          type: text
+          localizable: false
+          width: 50
+          listable: hidden
+          display: 'Top Banner Text'
+          unless:
+            show_top_banner: 'equals false'
+      -
+        handle: top_banner_link
+        field:
+          input_type: text
+          type: text
+          localizable: false
+          width: 50
+          listable: hidden
+          display: 'Top Banner Link'
+          unless:
+            show_top_banner: 'equals false'

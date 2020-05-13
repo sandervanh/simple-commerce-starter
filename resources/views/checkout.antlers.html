@@ -1,0 +1,105 @@
+---
+just_head: true
+---
+
+{{ if {cart:count} === 0 }}
+    {{ redirect to='/' }}
+{{ /if }}
+
+<div class="flex flex-col-reverse md:flex-row items-stretch md:h-full md:overflow-hidden">
+    <main class="bg-white w-full md:w-2/3 md:h-screen md:overflow-scroll">
+        <div class="w-full md:w-2/3 lg:w-1/2 mx-auto px-4 md:px-0 my-6">
+            <header class="hidden md:flex justify-center py-4 border-b">
+                <a class="text-gray-800 text-center font-medium text-2xl" href="/">{{ site_name }}</a>
+            </header>
+
+            {{ simple-commerce:form for='checkout' redirect='/thanks' }}
+                <div class="my-6">
+                    <div class="flex flex-col mb-2 py-2">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Your information</h3>
+
+                        {{ if logged_in }}
+                            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="text" name="name" placeholder="Full Name" value="{{ user }}{{ name }}{{ /user }}" readonly>
+                            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="email" name="email" placeholder="Email" value="{{ user }}{{ email }}{{ /user }}" readonly>
+                        {{ else }}
+                            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="text" name="name" placeholder="Full Name" value="{{ old:name }}">
+                            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="email" name="email" placeholder="Email" value="{{ old:email }}">
+                        {{ /if }}
+                    </div>
+
+                    <div x-data="{ gateway: '{{ simple-commerce:gateways }}{{ if first }}{{ formatted_class }}{{ /if }}{{ /simple-commerce:gateways }}' }" class="flex flex-col mb-2 py-2">
+                        <h3 class="font-bold text-lg mb-2 text-gray-800">Secure Payment</h3>
+
+                        <div>
+                            <select x-model="gateway" class="h-8 w-full border rounded p-2 mb-2 outline-none mr-2" name="gateway">
+                                {{ simple-commerce:gateways }}
+                                    <option value="{{ class }}">{{ name }}</option>
+                                {{ /simple-commerce:gateways }}
+                            </select>
+                        </div>
+
+                        {{ if {cart:total unformatted_total='true' } != '00.00' }}
+                            {{ simple-commerce:gateways }}
+                                <div x-show="gateway === '{{ formatted_class }}'">
+                                    {{ payment_form }}
+                                </div>
+                            {{ /simple-commerce:gateways }}
+                        {{ /if }}
+
+                        <label class="mb-2 text-gray-800 flex flex-row items-center" value="{{ old:consent }}">
+                            <input class="border rounded p-2 mr-2" type="checkbox" name="consent" required>
+                            I give permission to process and store my personal data for the purposes of my order, customer service and analytics.
+                        </label>
+                    </div>
+
+                    <div x-data="{ loading: false }" class="flex justify-center md:w-1/2 mx-auto">
+                        <button
+                            x-show="loading === true"
+                            class="bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold flex flex-row items-center justify-center"
+                            type="button">
+                            <div class="lds-dual-ring mr-6"></div>
+                            Processing
+                        </button>
+
+                        <button
+                            x-show="loading === false"
+                            class="bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold"
+                            type="button"
+                            @click.prevent="loading = true; if(typeof confirmPayment == 'function' && document.getElementsByName('gateway')[0].value == 'DoubleThreeDigital\\SimpleCommerceStripe\\StripeGateway') { confirmPayment(); } else { document.querySelector('form').submit() }">
+                            Complete Checkout
+                        </button>
+                    </div>
+                </div>
+            {{ /simple-commerce:form }}
+        </div>
+    </main>
+    <aside class="bg-gray-200 md:h-screen w-full md:w-1/3 md:sticky">
+        <div class="py-12 px-10">
+            <h2 class="mb-4 text-gray-800 font-medium text-xl">Order Summary</h2>
+            {{ cart:items }}
+                <div class="border-b py-4 w-full flex flex-row items-center justify-between">
+                    <a class="font-semibold" href="/product/{{ slug }}">{{ quantity }}x {{ variant:name }}</a>
+                    <span>{{ total | price }}</span>
+                </div>
+            {{ /cart:items }}
+            <div class="border-b py-4 w-full flex flex-row items-center justify-between">
+                <span>Shipping</span>
+                <span>{{ cart:total shipping='true' }}</span>
+            </div>
+            <div class="border-b py-4 w-full flex flex-row items-center justify-between">
+                <span>Tax</span>
+                <span>{{ cart:total tax='true' }}</span>
+            </div>
+            {{ if {cart:total coupon='true'} != '$0.00' }}
+                <div class="border-b py-4 w-full flex flex-row items-center justify-between">
+                    <span>Coupon Discount</span>
+                    <span>{{ cart:total coupon='true' }}</span>
+                </div>
+            {{ /if }}
+            <div class="border-b py-4 w-full flex flex-row items-center justify-between">
+                <span class="font-semibold text-lg">End Total</span>
+                <span class="text-lg">{{ cart:total }}</span>
+            </div>
+        </div>
+    </aside>
+</div>

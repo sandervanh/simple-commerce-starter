@@ -1,0 +1,63 @@
+{{ simple-commerce:product :slug='product' }}
+    <main class="my-6">
+        <div class="container mx-auto">
+            <div x-data="{
+                variant: '{{ variants }}{{ if first }}{{ uuid }}{{ /if }}{{ /variants }}',
+                quantity: 1,
+                loading: false
+            }">
+                {{ variants }}
+                    <div x-show="variant === '{{ uuid }}'" class="flex flex-col md:flex-row items-center">
+                        <div class="w-full md:w-2/3 mx-4">
+                            <div class="bg-gray-100 h-64 w-full"></div>
+                        </div>
+                        <div class="w-full md:w-1/3 mx-4">
+                            <h1 class="font-semibold text-3xl font-gray-800">{{ title }}</h1>
+                            <h3 class="mb-2 text-lg">{{ price }}</h3>
+                            <div class="leading-relaxed py-2">{{ description or '' | markdown }}</div>
+
+                            <div class="border-t mt-2 py-2">
+                                {{ simple-commerce:form for='cartCreate' class='flex flex-col' }}
+                                    <select x-model="variant" class="w-full h-8 my-2" name="variant">
+                                        <option disabled>Choose a variant</option>
+                                        {{ product:variants }}
+                                            <option value="{{ uuid }}" {{ if outofStock }} disabled {{ /if }}>{{ name }} {{ price }}</option>
+                                        {{ /product:variants }}
+                                    </select>
+
+                                    <div class="flex flex-row items-stretch w-full my-2">
+                                        {{ if stock === 0 && unlimited_stock != true }}
+                                            <p class="text-red-600 font-semibold">Out of stock</p>
+                                        {{ else }}
+                                            <select x-model="quantity" class="md:w-1/4 mr-2" name="quantity">
+                                                <option disabled>Quantity</option>
+                                                {{ loop from='1' :to='max_quantity' }}
+                                                    <option value="{{ value }}">{{ value }}x</option>
+                                                {{ /loop }}
+                                            </select>
+
+                                            <button
+                                                    x-show="loading === true"
+                                                    class="md:w-3/4 bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold flex flex-row items-center justify-center"
+                                                    type="button">
+                                                <div class="lds-dual-ring mr-6"></div> Adding
+                                            </button>
+
+                                            <button
+                                                    x-show="loading === false"
+                                                    class="md:w-3/4 bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold"
+                                                    type="button"
+                                                    @click="loading = true; document.forms[0].submit()">
+                                                Add to Cart
+                                            </button>
+                                        {{ /if }}
+                                    </div>
+                                {{ /simple-commerce:form }}
+                            </div>
+                        </div>
+                    </div>
+                {{ /variants }}
+            </div>
+        </div>
+    </main>
+{{ /simple-commerce:product }}

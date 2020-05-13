@@ -1,0 +1,6 @@
+title: General
+blueprint: general_global
+data:
+  show_top_banner: true
+  top_banner_text: 'Free Shipping for everything over £15'
+  top_banner_link: /
