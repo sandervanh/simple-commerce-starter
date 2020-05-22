@@ -26,7 +26,7 @@ just_head: true
                     </thead>
                     <tbody>
                         {{ cart:items }}
-                        <tr>
+                            <tr>
                                 <td class="border px-4 py-2">
                                     <a href="/products/{{ product:slug }}">{{ product:title }} ({{ variant:sku }})</a>
                                     {{ simple-commerce:form for='cartDelete' class='mt-2' }}

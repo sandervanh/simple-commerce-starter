@@ -1,0 +1,28 @@
+<h2 class="text-center font-bold text-gray-700 text-3xl">Register</h2>
+
+{{ user:register_form redirect='{ get:redirect }' }}
+    <div class="mt-6 mb-12 md:w-1/2 md:mx-auto">
+        {{ if errors }}
+            <ul>
+                {{ errors }}
+                    <li class="bg-red-600">{{ value }}</li>
+                {{ /errors }}
+            </ul>
+        {{ /if }}
+
+        <div class="flex flex-col mb-6">
+            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="name" name="name"
+                placeholder="Name" value="{{ old:name }}">
+            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="email" name="email"
+                placeholder="Email" value="{{ old:email }}">
+            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="password"
+                name="password" placeholder="Password">
+            <input class="border rounded p-2 mb-2 text-gray-600 focus:text-gray-800 outline-none" type="password"
+                name="password_confirmation" placeholder="Password confirmation">
+        </div>
+
+        <div class="flex justify-center md:w-1/2 mx-auto">
+            <button class="bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold">Register</button>
+        </div>
+    </div>
+{{ /user:register_form }}

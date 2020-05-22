@@ -29,6 +29,7 @@
                     transform: rotate(360deg);
                 }
             }
+
         </style>
         <title>{{ title or site_name }}</title>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
@@ -43,9 +44,7 @@
 
             {{ if !view:just_head }}
             <header>
-                {{ if general.show_top_banner }}
-                    <a class="bg-gray-200 w-full p-2 text-center font-bold text-gray-600 text-sm uppercase block" href="{{ general.top_banner_link }}">{{ general.top_banner_text }}</a>
-                {{ /if }}
+                <div class="bg-gray-200 w-full p-2 text-center font-bold text-gray-600 text-sm uppercase">Free shipping for everything over £15</div>
 
                 <nav class="w-full bg-white p-6">
                     <div class="container mx-auto flex flex-row items-center justify-between">

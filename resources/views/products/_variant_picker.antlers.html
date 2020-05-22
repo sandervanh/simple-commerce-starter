@@ -1,0 +1,38 @@
+<div class="border-t mt-2 py-2">
+    {{ simple-commerce:form for='cartCreate' class='flex flex-col' }}
+        <select x-model="variant" class="w-full h-8 my-2" name="variant">
+            <option disabled>Choose a variant</option>
+            {{ variants }}
+                <option value="{{ uuid }}" {{ if outofStock }} disabled {{ /if }}>{{ name }} {{ price }}</option>
+            {{ /variants }}
+        </select>
+
+        <div class="flex flex-row items-stretch w-full my-2">
+            {{ if stock === 0 && unlimited_stock != true }}
+                <p class="text-red-600 font-semibold">Out of stock</p>
+            {{ else }}
+                <select x-model="quantity" class="md:w-1/4 mr-2" name="quantity">
+                    <option disabled>Quantity</option>
+                    {{ loop from="1" to="{ max_quantity }" }}
+                        <option value="{{ value }}">{{ value }}x</option>
+                    {{ /loop }}
+                </select>
+
+                <button
+                        x-show="loading === true"
+                        class="md:w-3/4 bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold flex flex-row items-center justify-center"
+                        type="button">
+                    <div class="lds-dual-ring mr-6"></div> Adding
+                </button>
+
+                <button
+                        x-show="loading === false"
+                        class="md:w-3/4 bg-blue-600 hover:bg-blue-500 py-2 px-6 uppercase text-white font-bold"
+                        type="button"
+                        @click="loading = true; document.forms[0].submit()">
+                    Add to Cart
+                </button>
+            {{ /if }}
+        </div>
+    {{ /simple-commerce:form }}
+</div>
