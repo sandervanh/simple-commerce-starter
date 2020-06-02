@@ -79,7 +79,7 @@ just_head: true
             {{ cart:items }}
                 <div class="border-b py-4 w-full flex flex-row items-center justify-between">
                     <a class="font-semibold" href="/product/{{ slug }}">{{ quantity }}x {{ variant:name }}</a>
-                    <span>{{ total | price }}</span>
+                    <span>{{ total }}</span>
                 </div>
             {{ /cart:items }}
             <div class="border-b py-4 w-full flex flex-row items-center justify-between">
