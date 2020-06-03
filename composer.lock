@@ -566,20 +566,20 @@
         },
         {
             "name": "doctrine/cache",
-            "version": "1.10.0",
+            "version": "1.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/cache.git",
-                "reference": "382e7f4db9a12dc6c19431743a2b096041bcdd62"
+                "reference": "35a4a70cd94e09e2259dfae7488afc6b474ecbd3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/cache/zipball/382e7f4db9a12dc6c19431743a2b096041bcdd62",
-                "reference": "382e7f4db9a12dc6c19431743a2b096041bcdd62",
+                "url": "https://api.github.com/repos/doctrine/cache/zipball/35a4a70cd94e09e2259dfae7488afc6b474ecbd3",
+                "reference": "35a4a70cd94e09e2259dfae7488afc6b474ecbd3",
                 "shasum": ""
             },
             "require": {
-                "php": "~7.1"
+                "php": "~7.1 || ^8.0"
             },
             "conflict": {
                 "doctrine/common": ">2.2,<2.4"
@@ -644,7 +644,7 @@
                 "redis",
                 "xcache"
             ],
-            "time": "2019-11-29T15:36:20+00:00"
+            "time": "2020-05-27T16:24:54+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -1023,16 +1023,16 @@
         },
         {
             "name": "doublethreedigital/simple-commerce",
-            "version": "v1.0.0-beta.21",
+            "version": "v1.0.0-beta.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doublethreedigital/simple-commerce.git",
-                "reference": "0f0b01668a262dc3b4480ac764ee8ac8f5291536"
+                "reference": "dbf5932fc838fa8766ce88a2759e201576172347"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doublethreedigital/simple-commerce/zipball/0f0b01668a262dc3b4480ac764ee8ac8f5291536",
-                "reference": "0f0b01668a262dc3b4480ac764ee8ac8f5291536",
+                "url": "https://api.github.com/repos/doublethreedigital/simple-commerce/zipball/dbf5932fc838fa8766ce88a2759e201576172347",
+                "reference": "dbf5932fc838fa8766ce88a2759e201576172347",
                 "shasum": ""
             },
             "require": {
@@ -1068,7 +1068,7 @@
                 "proprietary"
             ],
             "description": "A perfectly simple e-commerce solution for Statamic",
-            "time": "2020-05-26T14:15:20+00:00"
+            "time": "2020-06-02T21:03:40+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -3678,16 +3678,16 @@
         },
         {
             "name": "sabberworm/php-css-parser",
-            "version": "8.3.0",
+            "version": "8.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
-                "reference": "91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f"
+                "reference": "d217848e1396ef962fb1997cf3e2421acba7f796"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f",
-                "reference": "91bcc3e3fdb7386c9a2e0e0aa09ca75cc43f121f",
+                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/d217848e1396ef962fb1997cf3e2421acba7f796",
+                "reference": "d217848e1396ef962fb1997cf3e2421acba7f796",
                 "shasum": ""
             },
             "require": {
@@ -3719,7 +3719,7 @@
                 "parser",
                 "stylesheet"
             ],
-            "time": "2019-02-22T07:42:52+00:00"
+            "time": "2020-06-01T09:10:00+00:00"
         },
         {
             "name": "scrumpy/html-to-prosemirror",
@@ -8740,7 +8740,6 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "doublethreedigital/simple-commerce": 10,
         "statamic/cms": 10
     },
     "prefer-stable": true,
