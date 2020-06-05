@@ -27,10 +27,16 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-3. Create your first user
+3. Migrate to create databse tables
+
+```
+php artisan migrate
+```
+
+4. Create your first user
 
 ```
 php please make:user
 ```
 
-4. **Do what you want!**
+5. **Do what you want!**
